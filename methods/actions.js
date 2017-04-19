@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 var functions = {
     authenticate: function(req, res){
-        User.findOne({ username: req.body.username }, function(err, user){
+        User.findOne({ email: req.body.email }, function(err, user){
             if(err) throw err;
             if(!user) {
                 return res.status(403).send({success: false,
@@ -29,15 +29,17 @@ var functions = {
         })
     },
     addNew: function(req, res){
-        if((!req.body.username) || (!req.body.password)){
-            console.log(req.body.username);
+        if((!req.body.email) || (!req.body.password)){
+            console.log(req.body.email);
             console.log(req.body.password);
 
             res.json({success: false, msg: 'Enter all values'});
         }
         else{
             var newUser = User({
-                username: req.body.username,
+                email: req.body.email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
                 password: req.body.password
             });
 
@@ -57,7 +59,7 @@ var functions = {
         if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
             var token = req.headers.authorization.split(' ')[1];
             var decodedtoken = jwt.decode(token, config.secret);
-            return res.json({success: true, msg: 'hello' +decodedtoken.username});
+            return res.json({success: true, msg: 'hello' +decodedtoken.email});
         }
         else{
             return res.json({success: false, msg: 'No header'});
