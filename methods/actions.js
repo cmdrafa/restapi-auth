@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 var functions = {
     authenticate: function(req, res){
-        User.findOne({ 'newUser.local.email': req.body.email }, function(err, user){
+        User.findOne({ 'local.email': req.body.email }, function(err, user){
             if(err) throw err;
             if(!user) {
                 return res.status(403).send({success: false,
