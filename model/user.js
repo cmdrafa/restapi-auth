@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var UserSchema = new Schema({
-    email: {
+    
+    local: {
+        email: {
         type: String,
         unique: true,
         required: true
@@ -18,6 +20,12 @@ var UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },},
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
     }
 });
 

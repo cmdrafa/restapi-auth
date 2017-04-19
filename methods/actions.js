@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 var functions = {
     authenticate: function(req, res){
-        User.findOne({ email: req.body.email }, function(err, user){
+        User.findOne({ 'local.email': req.body.email }, function(err, user){
             if(err) throw err;
             if(!user) {
                 return res.status(403).send({success: false,
@@ -37,10 +37,10 @@ var functions = {
         }
         else{
             var newUser = User({
-                email: req.body.email,
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                password: req.body.password
+                'local.email': req.body.email,
+                'local.firstname': req.body.firstname,
+                'local.lastname': req.body.lastname,
+                'local.password': req.body.password
             });
 
             newUser.save(function(err, newUser){
