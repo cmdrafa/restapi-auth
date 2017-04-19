@@ -1,4 +1,4 @@
-var dbname = 'user_dbv3';
+var dbname = 'user_dbv4';
 
 module.exports = {
     'database': 'mongodb://localhost:27017/' + dbname,

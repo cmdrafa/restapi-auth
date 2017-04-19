@@ -4,23 +4,11 @@ var bcrypt = require('bcrypt');
 var UserSchema = new Schema({
     
     local: {
-        email: {
-        type: String,
-        unique: true,
-        required: true
+        email: String,
+        firstname: String,
+        lastname: String,
+        password: String
     },
-    firstname: {
-        type: String,
-        required: true,
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }},
     google: {
         id: String,
         token: String,
@@ -51,7 +39,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods.comparePassword = function (passw, cb) {
-    bcrypt.compare(passw, this.password, function (err, isMatch) {
+    bcrypt.compare(passw, this.local.password, function (err, isMatch) {
         if (err) {
             return cb(err);
         }

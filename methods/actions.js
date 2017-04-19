@@ -6,11 +6,12 @@ var _ = require('lodash');
 
 var functions = {
     authenticate: function(req, res){
-        User.findOne({ 'local.email': req.body.email }, function(err, user){
+        User.findOne({ 'local.email' : req.body.email }, function(err, user){
             if(err) throw err;
             if(!user) {
                 return res.status(403).send({success: false,
                     msg: 'Authentication failed, user not found'});
+                    console.log("User not found " + req.body.email);
             }
 
             else{
@@ -22,7 +23,8 @@ var functions = {
                     else{
                         return res.status(403).send({success: false, 
                             msg: 'Authentication failed, wrong password.'});
-                    }
+                            console.log("Password problem");
+                        }
                 })
             }
 
