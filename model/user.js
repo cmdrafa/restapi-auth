@@ -20,7 +20,7 @@ var UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    },},
+    }},
     google: {
         id: String,
         token: String,
