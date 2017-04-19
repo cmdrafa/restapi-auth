@@ -36,11 +36,11 @@ var functions = {
             res.json({success: false, msg: 'Enter all values'});
         }
         else{
-            var newUser = new User()
-                newUser.local.email = req.body.email,
-                newUser.local.firstname = req.body.firstname,
-                newUser.local.lastname = req.body.lastname,
-                newUser.local.password = req.body.password
+            var newUser = new User();
+                newUser.local.email = req.body.email;
+                newUser.local.firstname = req.body.firstname;
+                newUser.local.lastname = req.body.lastname;
+                newUser.local.password = req.body.password;
             };
 
             newUser.save(function(err, newUser){
@@ -52,7 +52,6 @@ var functions = {
                     res.json({success: true, msg: 'Successfully saved'});
                 }
             })
-        }
     },
 
     getinfo: function(req, res){
