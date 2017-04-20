@@ -34,6 +34,8 @@ mongoose.connection.on('open', function() {
 
     });
 
+
+    //Google Routes outside routes - Move it later
     app.get('/authapi/auth/google/', passport.authenticate('google', { scope: ['profile', 'email']}));
     app.get('/authapi/auth/google/callback', passport.authenticate('google', {
     successRedirect : '/',
