@@ -34,8 +34,8 @@ mongoose.connection.on('open', function() {
 
     });
 
-    app.get('/auth/google/', passport.authenticate('google', { scope: ['profile', 'email']}));
-    app.get('/auth/google/callback', passport.authenticate('google', {
+    app.get('/authapi/auth/google/', passport.authenticate('google', { scope: ['profile', 'email']}));
+    app.get('/authapi/auth/google/callback', passport.authenticate('google', {
     successRedirect : '/',
     failureRedirect : '/'
 }));
