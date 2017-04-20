@@ -7,7 +7,7 @@ var passport = require('passport');
 var routes = require('./routes/routes');
 var bodyParser = require('body-parser');
 
-var port = process.env.PORT || 3333;
+var port = process.env.PORT || 4000;
 
 //Db connection
 mongoose.connect(config.database);
@@ -33,5 +33,12 @@ mongoose.connection.on('open', function() {
         console.log('Server is running on port: ' + port);
 
     });
+
+    app.get('/auth/google/', passport.authenticate('google', { scope: ['profile', 'email']}));
+    app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect : '/',
+    failureRedirect : '/'
+}));
+
 });
 
