@@ -29,7 +29,7 @@ module.exports = function(passport) {
         })
     }));
 
-    passport.use(new GoogleStrategy({
+ /*   passport.use(new GoogleStrategy({
 
         clientID : googleAuth.googleAuth.clientID,
         clienSecret : googleAuth.googleAuth.clientSecret,
@@ -105,5 +105,5 @@ module.exports = function(passport) {
             }
 
         });
-    }));
+    }));*/
 };
