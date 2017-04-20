@@ -29,6 +29,7 @@ mongoose.connection.on('open', function() {
     app.use(passport.initialize());
     require('./config/passport')(passport);
 
+
     app.listen(port, function(err){
         console.log('Server is running on port: ' + port);
 
