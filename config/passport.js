@@ -36,15 +36,18 @@ module.exports = function (passport) {
 
     },
         function (req, token, refreshToken, profile, done) {
+            console.log("Inside first google strategy function");
 
             process.nextTick(function () {
 
                 if (!req.user) {
                     User.findOne({ 'google.id': profile.id }, function (err, user) {
+                        console.log("Trying to find user inside db(google)");
                         if (err) {
                             return done(err);
 
                             if (user) {
+                                console.log("Trying to server JWT(google");
 
                             var token = jwt.encode(user, config.secret);
                             res.json({success: true, token: token});
@@ -52,6 +55,7 @@ module.exports = function (passport) {
                             
                             }
                             else {
+                                console.log("Creating new USer(google)");
                                 var newUser = new User();
 
                                 newUser.google.id = profile.id;
@@ -60,10 +64,12 @@ module.exports = function (passport) {
                                 newUser.google.email = (profile.emails[0].value || '').toLowerCase();
 
                                 newUser.save(function (err) {
+                                    console.log("Saving newUser google");
                                     if (err) {
                                         return done(err);
                                     }
                                     else {
+                                        console.log("Trying to give new user token");
                                         var token = jwt.encode(newUser, config.secret);
                                         res.json({success: true, token: token});
                                         return done(null, newUser);
