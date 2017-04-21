@@ -1,9 +1,12 @@
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
-var User = require('../model/user.js');
+var User = require('../model/user');
 var config = require('../config/database');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var GoogleAuth = require('../config/auth');
+var jwt = require("jwt-simple");
+var Q = require('q');
+var _ = require('lodash');
 
 module.exports = function (passport) {
 
@@ -45,9 +48,10 @@ module.exports = function (passport) {
                         console.log("Trying to find user inside db(google)");
                         if (err) {
                             return done(err);
+                            console.log("Error in findone");
 
                             if (user) {
-                                console.log("Trying to server JWT(google");
+                                console.log("Trying to server JWT(google)");
 
                             var token = jwt.encode(user, config.secret);
                             res.json({success: true, token: token});
