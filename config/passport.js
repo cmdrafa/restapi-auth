@@ -41,8 +41,6 @@ module.exports = function (passport) {
         function (req, token, refreshToken, profile, done) {
             console.log("Inside first google strategy function");
 
-            process.nextTick(function () {
-
                 if (!req.user) {
                     User.findOne({ 'google.id': profile.id }, function (err, user) {
                         console.log("Trying to find user inside db(google)");
@@ -51,12 +49,12 @@ module.exports = function (passport) {
                             console.log("Error in findone");
 
                             if (user) {
-                                console.log("Trying to server JWT(google)");
+                                console.log("Trying to serve JWT(google)");
 
-                            var token = jwt.encode(user, config.secret);
-                            res.json({success: true, token: token});
-                            return done(null, user);
-                            
+                                var token = jwt.encode(user, config.secret);
+                                res.json({ success: true, token: token });
+                                return done(null, user);
+
                             }
                             else {
                                 console.log("Creating new USer(google)");
@@ -75,16 +73,15 @@ module.exports = function (passport) {
                                     else {
                                         console.log("Trying to give new user token");
                                         var token = jwt.encode(newUser, config.secret);
-                                        res.json({success: true, token: token});
+                                        res.json({ success: true, token: token });
                                         return done(null, newUser);
-                                        
+
                                     }
                                 })
                             }
                         }
                     })
                 }
-            })
         }
     ))
 }
